@@ -5,9 +5,7 @@
 			"label": "Run debug",
 			"type": "shell",
 			"command": "make",
-			"args": [
-				"--directory=${workspaceFolder};",
-			],
+			"args": [],
 			"group": {
 				"kind": "build",
 				"isDefault": true
@@ -23,7 +21,6 @@
 			"command": "make",
 			"args": [
 				"DEBUG=0", 
-				"--directory=${workspaceFolder};",
 			],
 			"group": {
 				"kind": "build",
