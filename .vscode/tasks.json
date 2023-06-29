@@ -2,11 +2,10 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "make debug",
+            "label": "Run debug",
             "type": "shell",
             "command": "make",
             "args": [
-                "debug",
                 "--directory=${workspaceFolder};",
             ],
             "group":  {
@@ -17,6 +16,23 @@
                 "reveal":"always"
             },
             "problemMatcher": []
-        }
+        },
+        {
+            "label": "Run release",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "DEBUG=0", 
+                "--directory=${workspaceFolder};",
+            ],
+            "group":  {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal":"always"
+            },
+            "problemMatcher": []
+        }        
     ]
 }

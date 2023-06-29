@@ -5,11 +5,13 @@
 
 int main() {
   auto gb(std::make_unique<GlobBase>());
-  // GlobBase gb;
+
   auto ptrBar = gb->getBar();
-  auto ptrFoo = gb->getFoo();
   ptrBar->print();
+
+  auto ptrFoo = gb->getFoo();
   ptrFoo->print();
+
   std::cout << "Koniec wykonania\n";
   return 0;
 }

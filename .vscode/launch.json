@@ -2,13 +2,13 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "make build and debug",
+        "name": "Run debug",
         "type": "cppdbg",
         "request": "launch",
         "program": "${workspaceFolder}/${workspaceFolderBasename}",
         "args": [],
         // "args": ["raz", "dwa"],
-        "stopAtEntry": true,
+        "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
         "externalConsole": false,
@@ -29,8 +29,17 @@
             "ignoreFailures": true,
           }
         ],
-        "preLaunchTask": "make debug",
+        "preLaunchTask": "Run debug",
         // "miDebuggerPath": "/usr/bin/lldb"
+      },
+      {
+        "name": "Run release",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder}/${workspaceFolderBasename}",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "preLaunchTask": "Run release",
       }
     ]
   }

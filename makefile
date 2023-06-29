@@ -1,30 +1,44 @@
-BUILD_DIR = build
 SRC_DIR = src
+BUILD = build
+_DEBUG = debug
+_RELEASE = release
 SOURCES = $(shell find $(SRC_DIR) -name "*.cpp")
-TARGET  = $(shell basename $(PWD))
-
-OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
+PROGRAM_NAME = $(shell basename $(PWD))
 CXXFLAGS += -std=c++17
 
-default: $(TARGET)
+DEBUG ?= 1
+ifeq ($(DEBUG),1)
+    CXXFLAGS += -DDEBUG -g
+	TARGET = $(_DEBUG)
+else
+    CFLAGS += -DNDEBUG
+	TARGET = $(_RELEASE)
+endif
 
-debug: CXXFLAGS += -DDEBUG -g
-debug: default
+BUILD_DIR = $(BUILD)/$(TARGET)
+PROGRAM = $(BUILD_DIR)/$(PROGRAM_NAME)
 
-.SECONDEXPANSION:
+OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 
-$(OBJECTS) : $$(patsubst $(BUILD_DIR)/%.o,$(SRC_DIR)/%.cpp,$$@)
-	mkdir -p $(@D)
-	$(CXX) -c -o $@ $(CXXFLAGS) $<
+$(PROGRAM_NAME): $(PROGRAM) | $(shell rm -f $(PROGRAM_NAME))
+	cp $(PROGRAM) $(PROGRAM_NAME)
 
-$(TARGET): $(OBJECTS)
+$(PROGRAM): $(OBJECTS)
 	$(CXX) -o $@ $(CXXFLAGS) $^
 
-run:
-	./$(TARGET)
+${BUILD_DIR}:
+	mkdir -p $@
 
-clean: 
-	rm -f $(TARGET)
-	rm -rf $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | ${BUILD_DIR}
+	$(CXX) -c -o $@ $(CXXFLAGS) $<
 
-.PHONY: default
+run: $(PROGRAM_NAME)
+	./$(PROGRAM_NAME)
+
+clean:
+	rm -f $(PROGRAM_NAME)
+	rm -rf $(BUILD)
+
+rebuild: clean $(PROGRAM_NAME)
+
+.PHONY: run clean rebuild
