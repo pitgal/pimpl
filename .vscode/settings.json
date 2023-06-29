@@ -1,3 +1,16 @@
 {
-	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools"
+	"C_Cpp.default.configurationProvider": "ms-vscode.makefile-tools",
+	"files.associations": {
+		"array": "cpp",
+		"*.tcc": "cpp",
+		"string": "cpp",
+		"unordered_map": "cpp",
+		"memory": "cpp",
+		"string_view": "cpp",
+		"istream": "cpp",
+		"ostream": "cpp",
+		"streambuf": "cpp",
+		"functional": "cpp",
+		"tuple": "cpp"
+	}
 }

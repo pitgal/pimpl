@@ -1,17 +1,19 @@
 #include <iostream>
-#include "globbase.h"
-#include "foo.h"
-#include "bar.h"
+#include "pimpl.h"
 
 int main()
 {
-	auto gb(std::make_unique<GlobBase>());
+	auto pimpl(std::make_unique<Pimpl>());
+	pimpl->printFoo();
+	pimpl->printBar();
 
-	auto ptrBar = gb->getBar();
-	ptrBar->print();
-
-	auto ptrFoo = gb->getFoo();
-	ptrFoo->print();
+#ifdef DEBUG
+	Pimpl impl = std::move(*pimpl.get());
+	impl.printFoo();
+	impl.printBar();
+	pimpl->printFoo();
+	pimpl->printBar();
+#endif
 
 	std::cout << "Koniec wykonania\n";
 	return 0;

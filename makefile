@@ -4,7 +4,7 @@ _DEBUG = debug
 _RELEASE = release
 SOURCES = $(shell find $(SRC_DIR) -name "*.cpp")
 PROGRAM_NAME = $(shell basename $(PWD))
-CXXFLAGS += -std=c++17
+CXXFLAGS += -std=c++17 -Wall -Wextra
 
 DEBUG ?= 1
 ifeq ($(DEBUG),1)
