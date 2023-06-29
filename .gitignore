@@ -1,2 +1,4 @@
 pimpl
 .DS_Store
+\build
+build/bar.o
