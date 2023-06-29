@@ -3,15 +3,16 @@
 #include "foo.h"
 #include "bar.h"
 
-int main() {
-  auto gb(std::make_unique<GlobBase>());
+int main()
+{
+	auto gb(std::make_unique<GlobBase>());
 
-  auto ptrBar = gb->getBar();
-  ptrBar->print();
+	auto ptrBar = gb->getBar();
+	ptrBar->print();
 
-  auto ptrFoo = gb->getFoo();
-  ptrFoo->print();
+	auto ptrFoo = gb->getFoo();
+	ptrFoo->print();
 
-  std::cout << "Koniec wykonania\n";
-  return 0;
+	std::cout << "Koniec wykonania\n";
+	return 0;
 }

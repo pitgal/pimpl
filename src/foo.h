@@ -1,4 +1,7 @@
+#pragma once
 
-struct Foo {
-  void print();
+struct Foo
+{
+	void print();
+	float value{3.14};
 };

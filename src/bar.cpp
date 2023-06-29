@@ -2,5 +2,5 @@
 #include "bar.h"
 
 void Bar::print() {
-  std::cout << "Bar\n";
+	std::cout << "Bar value: " << value << std::endl;
 }

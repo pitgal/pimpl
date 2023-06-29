@@ -1,4 +1,6 @@
+#pragma once
 
 struct Bar {
-  void print();
+	void print();
+	int value={42};
 };
