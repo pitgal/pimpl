@@ -5,14 +5,17 @@ int main()
 {
 	auto pimpl(std::make_unique<Pimpl>());
 	pimpl->printFoo();
-	pimpl->printBar();
 
 #ifdef DEBUG
-	Pimpl impl = std::move(*pimpl.get());
-	impl.printFoo();
+	Pimpl impl = std::move(*pimpl.release());
 	impl.printBar();
-	pimpl->printFoo();
-	pimpl->printBar();
+	// pimpl->printFoo(); //to już się wywali
+
+	// Pimpl pimpl2;
+	// pimpl2 = std::move(std::make_unique<Pimpl>(impl));
+	// pimpl2.printBar();
+
+	impl.printBar();
 #endif
 
 	std::cout << "Koniec wykonania\n";

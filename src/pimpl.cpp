@@ -5,50 +5,41 @@
 
 class Pimpl::Impl{
 public:
-	int cnt_ = 0;
-	Foo* pFoo;
-	Bar* pBar;
-	Impl() : pFoo(new Foo), pBar(new Bar){}
-	~Impl() { delete pFoo; delete pBar; }
+	Impl() : m_pFoo(std::make_unique<Foo>() ), m_pBar(std::make_unique<Bar>()){}
+	void printBar() const { m_pFoo->print(); }
+	void printFoo() const { m_pBar->print(); }
+
+private:
+	int m_someNumber = 0;
+	std::unique_ptr<Foo> m_pFoo;
+	std::unique_ptr<Bar> m_pBar;
 };
 
 void Pimpl::printBar() const {
-	if(pImpl)
-		pImpl->pBar->print();
+	m_pImpl->printBar();
 }
 
 void Pimpl::printFoo() const {
-	if(pImpl)
-		pImpl->pFoo->print();
+	m_pImpl->printFoo();
 }
 
-void Pimpl::setFoo(float val) {
-	if(pImpl)
-		pImpl->pFoo->value = val;
-}
+Pimpl::Pimpl() : m_pImpl(std::make_unique<Impl>()){}
 
-void Pimpl::setBar(int val) {
-	if(pImpl)
-		pImpl->pBar->value = val;
-}
+Pimpl::~Pimpl() = default;
 
-Pimpl::Pimpl() : pImpl(std::make_unique<Impl>()){}
-
-// Pimpl::Pimpl(const Pimpl& other) : pImpl(std::make_unique<Impl>(*other.pImpl)) {}
-
-Pimpl::~Pimpl() {}
-
-// Pimpl& Pimpl::operator=(const Pimpl& rhs) {
-// 	if (this != &rhs)
-// 		*pImpl = *rhs.pImpl;
-// 	return *this;
-// }
-
-Pimpl::Pimpl(Pimpl&& other) noexcept : pImpl(nullptr) { this->swap(other); }
+Pimpl::Pimpl(Pimpl&& other) noexcept : m_pImpl(nullptr) { this->swap(other); }
 
 Pimpl& Pimpl::swap(Pimpl& rhs) {
-    std::swap( pImpl, rhs.pImpl);
+    std::swap( m_pImpl, rhs.m_pImpl);
     return *this;
 }
 
 Pimpl& Pimpl::operator=(Pimpl&& rhs) noexcept { return this->swap(rhs); }
+
+// Pimpl::Pimpl(const Pimpl& other) : m_pImpl(std::make_unique<Impl>(*other.m_pImpl)) {}
+
+// Pimpl& Pimpl::operator=(const Pimpl& rhs) {
+// 	if (this != &rhs)
+// 		*m_pImpl = *rhs.m_pImpl;
+// 	return *this;
+// }
