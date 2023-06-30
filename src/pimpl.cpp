@@ -6,8 +6,8 @@
 class Pimpl::Impl{
 public:
 	Impl() : m_pFoo(std::make_unique<Foo>() ), m_pBar(std::make_unique<Bar>()){}
-	void printBar() const { m_pFoo->print(); }
-	void printFoo() const { m_pBar->print(); }
+	void printFoo() const { m_pFoo->print(); }
+	void printBar() const { m_pBar->print(); }
 
 private:
 	int m_someNumber = 0;
@@ -15,12 +15,11 @@ private:
 	std::unique_ptr<Bar> m_pBar;
 };
 
-void Pimpl::printBar() const {
-	m_pImpl->printBar();
-}
-
-void Pimpl::printFoo() const {
-	m_pImpl->printFoo();
+void Pimpl::print() const {
+	if(m_pImpl) {
+		m_pImpl->printFoo();
+		m_pImpl->printBar();
+	}
 }
 
 Pimpl::Pimpl() : m_pImpl(std::make_unique<Impl>()){}

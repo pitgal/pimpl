@@ -18,6 +18,5 @@ public:
 	Pimpl &operator=(const Pimpl& rhs) = delete;//kopiujący operator przypisania
 	Pimpl &operator=(Pimpl&& rhs) noexcept;		//przenoszący operator przypisania
 
-	void printBar() const;
-	void printFoo() const;
+	void print() const;
 };
