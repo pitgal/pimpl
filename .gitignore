@@ -1,3 +1,4 @@
+*.exe
 pimpl
 .DS_Store
 \build

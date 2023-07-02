@@ -2,8 +2,8 @@ SRC_DIR = src
 BUILD = build
 _DEBUG = debug
 _RELEASE = release
-SOURCES = $(shell find $(SRC_DIR) -name "*.cpp")
-PROGRAM_NAME = $(shell basename $(PWD))
+SOURCES = $(shell ls src/*.cpp)
+PROGRAM_NAME = $(shell basename $$PWD)
 CXXFLAGS += -std=c++17 -Wall -Wextra
 
 DEBUG ?= 1
@@ -33,12 +33,17 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp | ${BUILD_DIR}
 	$(CXX) -c -o $@ $(CXXFLAGS) $<
 
 run: $(PROGRAM_NAME)
-	./$(PROGRAM_NAME)
+	@echo Running $(PROGRAM_NAME)
+	@./$(PROGRAM_NAME)
 
 clean:
 	rm -f $(PROGRAM_NAME)
 	rm -rf $(BUILD)
 
+info:
+	@echo SOURCES: $(SOURCES)
+	@echo PROGRAM_NAME: $(PROGRAM_NAME)
+
 rebuild: clean $(PROGRAM_NAME)
 
-.PHONY: run clean rebuild
+.PHONY: run clean info rebuild

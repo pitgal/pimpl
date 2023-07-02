@@ -4,9 +4,9 @@
 int main()
 {
 #ifdef DEBUG
-	std::cout << "Wersja Debug\n";
+	std::cout << "Debug version\n";
 #else
-	std::cout << "Wersja Release\n";
+	std::cout << "Release version\n";
 #endif
 
 	auto pimpl(std::make_unique<Pimpl>());
@@ -23,6 +23,6 @@ int main()
 	impl = std::move(*pimpl2.release());
 	impl.print();
 
-	std::cout << "Koniec wykonania\n";
+	std::cout << "Program finished\n";
 	return 0;
 }
