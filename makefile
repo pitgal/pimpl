@@ -1,17 +1,21 @@
+.PHONY: run clean info rebuild
+
 SRC_DIR = src
 BUILD = build
 _DEBUG = debug
 _RELEASE = release
-SOURCES = $(shell ls src/*.cpp)
+SOURCES = $(shell ls $(SRC_DIR)/*.cpp)
 PROGRAM_NAME = $(shell basename $$PWD)
 CXXFLAGS += -std=c++17 -Wall -Wextra
 
+#default debug
 DEBUG ?= 1
+
 ifeq ($(DEBUG),1)
-  CXXFLAGS += -DDEBUG -g
+	CXXFLAGS += -DDEBUG -g
 	TARGET = $(_DEBUG)
 else
-  CFLAGS += -DNDEBUG
+	CFLAGS += -DNDEBUG
 	TARGET = $(_RELEASE)
 endif
 
@@ -41,9 +45,8 @@ clean:
 	rm -rf $(BUILD)
 
 info:
-	@echo SOURCES: $(SOURCES)
 	@echo PROGRAM_NAME: $(PROGRAM_NAME)
+	@echo TARGET: $(TARGET)
+	@echo SOURCES: $(SOURCES)
 
 rebuild: clean $(PROGRAM_NAME)
-
-.PHONY: run clean info rebuild
