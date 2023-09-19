@@ -8,10 +8,10 @@ CXXFLAGS += -std=c++17 -Wall -Wextra
 
 DEBUG ?= 1
 ifeq ($(DEBUG),1)
-    CXXFLAGS += -DDEBUG -g
+  CXXFLAGS += -DDEBUG -g
 	TARGET = $(_DEBUG)
 else
-    CFLAGS += -DNDEBUG
+  CFLAGS += -DNDEBUG
 	TARGET = $(_RELEASE)
 endif
 
